@@ -1,8 +1,9 @@
-//import moment from "moment";
-
 const API_KEY = "95775b42e188d6443a0bfb132dcec5e1";
 const BASE_URL = `https://api.themoviedb.org/3`;
 const URL_TREND = `${BASE_URL}/trending/movie/week`;
+const URL_POPULAR = `${BASE_URL}/movie/popular`;
+const URL_UPCOMING = `${BASE_URL}/movie/upcoming`;
+const URL_TOP = `${BASE_URL}/movie/top_rated`;
 const URL_SEARCH = `${BASE_URL}/search/movie`;
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
 const URL_MOVIE = `${BASE_URL}/movie/`;
@@ -106,17 +107,47 @@ async function getMoviesBySearch() {
   showMovies(respData);
 }
 
-// async function getMoviesVideo(id) {
-//     //console.log(respData)
-//     //const id = ;
-//     const resp = await fetch(`${URL_MOVIE}${id}/videos?api_key=${API_KEY}`, {
-//         method: 'GET',
-//     });
+// P O P U L A R   M O V I E S
 
-//     const respData = await resp.json();
-//     console.log(respData)
-//     //showMovies(respData)
-// }
+const popular = document.querySelector(".btn__popular");
+popular.addEventListener("click", () => getPopularMovies());
+
+async function getPopularMovies() {
+  const resp = await fetch(`${URL_POPULAR}?api_key=${API_KEY}`, {
+    method: "GET",
+  });
+
+  const respData = await resp.json();
+  showMovies(respData);
+}
+
+// U P C O M I N G   M O V I E S
+
+const upcoming = document.querySelector(".btn__upcoming");
+upcoming.addEventListener("click", () => getUpcomingMovies());
+
+async function getUpcomingMovies() {
+  const resp = await fetch(`${URL_UPCOMING}?api_key=${API_KEY}`, {
+    method: "GET",
+  });
+
+  const respData = await resp.json();
+  showMovies(respData);
+}
+
+// T O P   R A T E D   M O V I E S
+
+const topRated = document.querySelector(".btn__top");
+topRated.addEventListener("click", () => getTopRatedMovies());
+
+async function getTopRatedMovies() {
+  const resp = await fetch(`${URL_TOP}?api_key=${API_KEY}`, {
+    method: "GET",
+  });
+
+  const respData = await resp.json();
+  showMovies(respData);
+}
 
 // M O D A L
 const modalEl = document.querySelector(".modal");
